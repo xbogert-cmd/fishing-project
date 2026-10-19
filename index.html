@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BiteMap — Live NC Fishing Intel</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">🎣</span>
+      <div>
+        <h1>BiteMap</h1>
+        <p class="subtitle">Live fishing intelligence · Wilmington & Charlotte, NC</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="region-switch" id="regionSwitch">
+        <button data-region="wilmington" class="active">Wilmington</button>
+        <button data-region="charlotte">Charlotte</button>
+      </div>
+      <button id="locateBtn" class="btn-primary">📍 Use My GPS</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <section class="card conditions-card">
+        <h2>Current Conditions</h2>
+        <div class="conditions-grid" id="conditionsGrid">
+          <div class="cond-loading">Loading live data…</div>
+        </div>
+      </section>
+
+      <section class="card score-card">
+        <h2>Overall Bite Score</h2>
+        <div class="score-ring" id="scoreRing">
+          <div class="score-num" id="scoreNum">—</div>
+          <div class="score-label" id="scoreLabel">calculating</div>
+        </div>
+        <div class="score-factors" id="scoreFactors"></div>
+      </section>
+
+      <section class="card times-card">
+        <h2>Best Times Today</h2>
+        <div class="times-list" id="timesList"></div>
+      </section>
+
+      <section class="card fish-card">
+        <h2>What's Biting</h2>
+        <div class="fish-list" id="fishList"></div>
+      </section>
+
+      <section class="card social-card">
+        <h2>Live Reports</h2>
+        <div class="social-tabs">
+          <button class="active" data-src="reddit">Reddit</button>
+          <button data-src="twitter">X/Twitter</button>
+        </div>
+        <div class="social-feed" id="socialFeed">Loading reports…</div>
+      </section>
+    </aside>
+
+    <section class="map-wrap">
+      <div id="map"></div>
+      <div class="map-legend">
+        <h3>Bite Score</h3>
+        <div><span class="dot dot-hot"></span> 80-100 · Fire</div>
+        <div><span class="dot dot-good"></span> 60-79 · Good</div>
+        <div><span class="dot dot-ok"></span> 40-59 · Average</div>
+        <div><span class="dot dot-slow"></span> &lt; 40 · Slow</div>
+      </div>
+    </section>
+
+    <aside class="detail-panel" id="detailPanel">
+      <button class="close-detail" id="closeDetail">×</button>
+      <div id="detailContent"></div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <span>Data: Open-Meteo · NOAA Tides · OpenStreetMap · Reddit · NC WRC species data</span>
+    <span id="lastUpdate">—</span>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="data/spots.js"></script>
+  <script src="data/fish.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
